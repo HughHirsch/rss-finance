@@ -1,0 +1,47 @@
+[
+  {
+    "_note": "Fictional companies and sources. Normal item with full text.",
+    "id": "a1",
+    "url": "https://news.example.com/markets/acme-semi-q3",
+    "title": "Acme Semiconductor (ACMS) beats Q3 estimates on data-center demand",
+    "source": "Example Markets",
+    "published": "2026-11-05T13:30:00Z",
+    "text": "Acme Semiconductor reported third-quarter revenue of $4.2 billion, ahead of analyst estimates of $3.9 billion, driven by demand for its data-center accelerators.\n\nThe company raised its full-year guidance and said supply constraints on advanced packaging would ease in the first half of next year.\n\nShares of ACMS rose 6% in after-hours trading. Chief executive Dana Ruiz said orders from cloud providers had doubled year over year, and that the company expects its next-generation chip to ship in volume by mid-2027.\n\nAnalysts at Example Research noted that gross margin expanded to 61%, the highest in the company's history, and kept their buy rating on the stock."
+  },
+  {
+    "_note": "Same story from a second source. Retrieval should not return both as separate answers.",
+    "id": "a2",
+    "url": "https://wire.example.org/2026/11/05/acms-earnings?utm_source=rss&utm_medium=feed",
+    "title": "ACMS shares jump after quarterly results top forecasts",
+    "source": "Example Wire",
+    "published": "2026-11-05T14:02:00Z",
+    "text": "Acme Semiconductor's quarterly revenue of $4.2 billion beat forecasts, and the chipmaker lifted its outlook for the year. Shares climbed about 6% after the bell."
+  },
+  {
+    "_note": "Summary only, no body. Typical of headline-only feeds.",
+    "id": "a3",
+    "url": "https://news.example.com/regulation/globex-probe",
+    "title": "Regulators open probe into Globex Logistics (GLBX) accounting",
+    "source": "Example Markets",
+    "published": "2026-11-06T09:15:00Z",
+    "text": "Regulators said they are investigating Globex Logistics over how it recognized revenue from long-term contracts."
+  },
+  {
+    "_note": "Missing published time. Decide how time filters treat it.",
+    "id": "a4",
+    "url": "https://blog.example.net/initech-supplier-deal",
+    "title": "Initech signs multi-year supply agreement with Acme Semiconductor",
+    "source": "Example Blog",
+    "published": null,
+    "text": "Initech will buy accelerator chips from Acme Semiconductor under a multi-year agreement, the companies said. Terms were not disclosed."
+  },
+  {
+    "_note": "Older article. Should drop out of a 7-day window.",
+    "id": "a5",
+    "url": "https://news.example.com/markets/globex-guidance-cut",
+    "title": "Globex Logistics cuts full-year guidance as freight volumes slow",
+    "source": "Example Markets",
+    "published": "2026-10-01T12:00:00Z",
+    "text": "Globex Logistics lowered its full-year revenue forecast, citing weaker freight volumes in Europe and higher fuel costs. The stock fell 9%."
+  }
+]

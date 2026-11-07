@@ -1,0 +1,38 @@
+[project]
+name = "rss-finance-model"
+version = "0.1.0"
+description = "RAG over articles collected by rss-finance, using local models served by Ollama."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "lancedb",
+    "ollama",
+]
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "pytest",
+    "ruff",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rss_finance_model"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+strict = true
+mypy_path = "src"
