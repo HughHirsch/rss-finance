@@ -1,8 +1,8 @@
-# rss-finance-model
+# model
 
-The model side of rss-finance: entity and relationship extraction with a local LLM,
-the vector index and RAG over the collected articles, and later fine-tuning.
-It reads the article data that [rss-finance](https://github.com/HughHirsch/rss-finance) collects.
+The model side of rss-finance: the vector index and RAG over the collected articles, then
+entity and relationship extraction with a local LLM, and later fine-tuning. It reads the
+SQLite database the [collector](../collector) writes to `data/articles.db` at the repo root.
 
 Everything runs locally: embeddings and the chat model are served by Ollama on the GPU.
 
@@ -10,20 +10,21 @@ Everything runs locally: embeddings and the chat model are served by Ollama on t
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh     # uv, if not installed
-uv sync                                              # Python 3.12 venv + dependencies
+cd ~/GitHub/rss-finance/model
+uv sync                                              # Python 3.12 venv (repo root) + dependencies
 curl -fsSL https://ollama.com/install.sh | sh       # Ollama, if not installed
 ollama pull nomic-embed-text
 ollama pull qwen3:14b
 ```
 
-Settings live in `config.toml`.
+Settings live in `config.toml`; relative paths in it resolve against this folder.
 
 ## How it fits together
 
 ```
-rss-finance SQLite ──► articles ──► chunking ──► embeddings ──► store (LanceDB)
-                                                                      │
-question ──► retrieve (embed query, search, filter) ◄─────────────────┘
+collector SQLite ──► articles ──► chunking ──► embeddings ──► store (LanceDB)
+                                                                    │
+question ──► retrieve (embed query, search, filter) ◄───────────────┘
                  │
                  ▼
              answer (prompt + Ollama chat model) ──► answer with cited URLs
@@ -41,6 +42,7 @@ question ──► retrieve (embed query, search, filter) ◄──────�
 | `cli.py` | `index`, `ask`, `search` commands |
 
 Each module's docstring lists what it's responsible for and the design decisions to make.
+For a step-by-step walkthrough, see [docs/TUTORIAL.md](docs/TUTORIAL.md).
 
 ## Suggested build order
 
@@ -54,6 +56,8 @@ Each module's docstring lists what it's responsible for and the design decisions
 Entity extraction and fine-tuning come later.
 
 ## Checks
+
+Run from this folder:
 
 ```bash
 uv run pytest

@@ -1,9 +1,10 @@
-# Settings for rss-finance-model.
+# Settings for the model package (rss-finance-model).
+# Relative paths resolve against this file's folder (model/).
 # The numbers are starting points; expect to tune them once you have real articles.
 
 [articles]
-# SQLite database written by the rss-finance collector. Read-only from this repo.
-db_path = "../rss-finance/data/articles.db"
+# SQLite database written by the collector (repo-root data/). Read-only from the model.
+db_path = "../data/articles.db"
 
 [index]
 path = "data/index"      # LanceDB directory (gitignored)

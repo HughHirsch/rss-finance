@@ -1,0 +1,12 @@
+# uv workspace for rss-finance.
+#
+# The collector and the model are separate packages with their own dependencies, so the
+# collector can be installed and deployed alone (no LanceDB or Ollama). They share one
+# lockfile (uv.lock) and one .venv at the repo root.
+#
+#   cd collector && uv run pytest     # work on the collector
+#   cd model && uv run pytest         # work on the model
+#   uv sync --all-packages            # install both
+
+[tool.uv.workspace]
+members = ["collector", "model"]
