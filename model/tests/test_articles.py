@@ -34,7 +34,8 @@ def test_read_articles_since_keeps_undated(tmp_path: Path) -> None:
     db = tmp_path / "articles.db"
     conn = sqlite3.connect(db)
     conn.execute(
-        "CREATE TABLE articles (id TEXT, url TEXT, title TEXT, source TEXT, published TEXT, text TEXT)"
+        "CREATE TABLE articles "
+        "(id TEXT, url TEXT, title TEXT, source TEXT, published TEXT, text TEXT)"
     )
     conn.executemany(
         "INSERT INTO articles VALUES (?, ?, ?, ?, ?, ?)",
@@ -62,6 +63,6 @@ def test_load_settings_resolves_paths_against_config_folder() -> None:
 
 def test_load_settings_rejects_missing_key(tmp_path: Path) -> None:
     bad = tmp_path / "config.toml"
-    bad.write_text("[articles]\n")
+    bad.write_text("[articles]\n[index]\n[models]\n[retrieval]\n")
     with pytest.raises(ConfigError, match="missing key 'db_path'"):
         load_settings(bad)
