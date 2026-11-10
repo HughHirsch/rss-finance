@@ -1,0 +1,20 @@
+# Settings for rss-finance-model.
+# The numbers are starting points; expect to tune them once you have real articles.
+
+[articles]
+# SQLite database written by the rss-finance collector. Read-only from this repo.
+db_path = "../rss-finance/data/articles.db"
+
+[index]
+path = "data/index"      # LanceDB directory (gitignored)
+table = "chunks"
+chunk_size = 1000        # unit is your call: characters, words or tokens
+chunk_overlap = 150
+
+[models]
+embed = "nomic-embed-text"
+chat = "qwen3:14b"
+
+[retrieval]
+top_k = 8
+recent_days = 7          # default time window; finance questions are usually about recent news
