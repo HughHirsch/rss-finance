@@ -1,12 +1,21 @@
-# uv workspace for rss-finance.
+# Thin root project: pulls in the standalone collector (its own repo) and the model workspace
+# member, sharing one lockfile (uv.lock) and one .venv at the repo root.
 #
-# The collector and the model are separate packages with their own dependencies, so the
-# collector can be installed and deployed alone (no LanceDB or Ollama). They share one
-# lockfile (uv.lock) and one .venv at the repo root.
-#
-#   cd collector && uv run pytest     # work on the collector
-#   cd model && uv run pytest         # work on the model
-#   uv sync --all-packages            # install both
+#   uv run rss-finance-collector collect   # collector, installed from git
+#   cd model && uv run pytest              # work on the model
+#   uv sync --all-packages                 # install everything
+
+[project]
+name = "rss-finance"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["rss-finance-collector"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+rss-finance-collector = { git = "ssh://git@github.com/HughHirsch/rss-collector.git" }
 
 [tool.uv.workspace]
-members = ["collector", "model"]
+members = ["model"]

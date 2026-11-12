@@ -8,28 +8,29 @@ local LLM served by Ollama (RAG). Built for personal use.
 
 ```
 rss-finance/
-├── collector/      # fetch feeds on a schedule → data/articles.db   (feedparser, SQLite)
 ├── model/          # index + RAG over the articles, later extraction (LanceDB, Ollama)
+├── feeds.toml      # the feed list the collector reads (run it from this folder)
+├── local.toml      # gitignored: contact for the collector's User-Agent
 ├── data/           # gitignored: articles.db, logs
-├── docs/           # guides, starting with docs/COLLECTOR.md
-└── pyproject.toml  # uv workspace tying the two packages together
+└── pyproject.toml  # uv project: the model workspace member plus the collector dependency
 ```
 
-The collector and the model are separate Python packages in one uv workspace. Each has its
-own dependencies, so the collector can run on its own (for example on an always-on box)
-without LanceDB or Ollama. The only contract between them is the SQLite schema the collector
-writes and `model/src/rss_finance_model/articles.py` reads.
+The collector lives in its own repo, [rss-collector](https://github.com/HughHirsch/rss-collector),
+and is installed from git. The model is a package in this repo. The only contract between
+them is the SQLite schema the collector writes and `model/src/rss_finance_model/articles.py`
+reads.
 
 ## Getting started
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh   # uv, if not installed
 cd ~/GitHub/rss-finance
-uv sync --all-packages                            # Python 3.12 + both packages
+uv sync --all-packages                            # Python 3.12 + model + collector
+uv run rss-finance-collector collect              # one pass over feeds.toml
 ```
 
-- Collector: [docs/COLLECTOR.md](docs/COLLECTOR.md), then work in `collector/`.
+- Collector: work in the [rss-collector](https://github.com/HughHirsch/rss-collector) repo
+  (its guide is `docs/COLLECTOR.md` there).
 - Model: [model/README.md](model/README.md) and [model/docs/TUTORIAL.md](model/docs/TUTORIAL.md).
 
-Run checks from inside each package folder: `uv run pytest`, `uv run ruff check .`,
-`uv run mypy src`.
+Run the model's checks from `model/`: `uv run pytest`, `uv run ruff check .`, `uv run mypy src`.

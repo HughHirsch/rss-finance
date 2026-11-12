@@ -34,3 +34,6 @@ data/
 # Claude
 CLAUDE.md
 .claude/
+
+# Machine-local settings (contact details)
+local.toml

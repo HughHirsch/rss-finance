@@ -2,7 +2,8 @@
 
 The model side of rss-finance: the vector index and RAG over the collected articles, then
 entity and relationship extraction with a local LLM, and later fine-tuning. It reads the
-SQLite database the [collector](../collector) writes to `data/articles.db` at the repo root.
+SQLite database the [collector](https://github.com/HughHirsch/rss-collector) writes to
+`data/articles.db` at the repo root.
 
 Everything runs locally: embeddings and the chat model are served by Ollama on the GPU.
 

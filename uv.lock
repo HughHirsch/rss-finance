@@ -8,7 +8,7 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "rss-finance-collector",
+    "rss-finance",
     "rss-finance-model",
 ]
 
@@ -741,28 +741,22 @@ wheels = [
 ]
 
 [[package]]
-name = "rss-finance-collector"
+name = "rss-finance"
 version = "0.1.0"
-source = { editable = "collector" }
+source = { virtual = "." }
 dependencies = [
-    { name = "feedparser" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "ruff" },
+    { name = "rss-finance-collector" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "feedparser" }]
+requires-dist = [{ name = "rss-finance-collector", git = "ssh://git@github.com/HughHirsch/rss-collector.git" }]
 
-[package.metadata.requires-dev]
-dev = [
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "ruff" },
+[[package]]
+name = "rss-finance-collector"
+version = "0.1.0"
+source = { git = "ssh://git@github.com/HughHirsch/rss-collector.git#e1d1c62fdedb350a88c6abb210cecc70a34cd134" }
+dependencies = [
+    { name = "feedparser" },
 ]
 
 [[package]]

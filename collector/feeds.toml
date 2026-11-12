@@ -1,9 +1,0 @@
-# Feeds to collect. One [[feed]] block per feed.
-#
-# Choosing feeds is part of the work: adding a feed later doesn't give you its past, so spend
-# time on a good list now. For each candidate, check that it is reachable, updates often,
-# and that its terms allow automated reading.
-#
-# [[feed]]
-# name = "Example Markets"            # becomes the article's `source`
-# url = "https://news.example.com/markets/rss"
